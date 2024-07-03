@@ -1,0 +1,13 @@
+#page-spinner {
+    display: none;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#page-spinner.htmx-request {
+    opacity: 1;
+    display: block;
+}

@@ -1,0 +1,19 @@
+{% load static %}
+{% if object_list %}
+{% for user in object_list %}
+<div class="col-md-4">
+<div class="card m-2">
+    <img src="{{prod.svg.url}}" class="card-img-top bg-white p-1">
+    <div class="card-body">
+        <div class="card-title h3">{{user.name}}</div>
+        <span>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat libero vitae magna imperdiet commodo.
+            Sed quam dui, consectetur eu metus sit amet, iaculis blandit velit.
+        </span>
+    </div>
+</div>
+</div>
+{% endfor %}
+{% else %}
+<p>Geen resultaten</p>
+{% endif %}

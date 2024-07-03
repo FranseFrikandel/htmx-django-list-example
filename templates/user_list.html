@@ -1,0 +1,39 @@
+{% extends partial|yesno:"partial.html,base.html" %}
+{% load static %}
+{% block title %}
+<title>Users - Example site</title>
+{% endblock %}
+{% block content %}
+{% if partial %}
+    {% include "user_list_snippet.html" %}
+    {% if page_obj.has_next %}
+    <div id="load_next" class="d-block mx-auto htmx-indicator spinner-border" hx-swap-oob="true" hx-trigger="revealed"
+    hx-get="/?page={{ page_obj.next_page_number }}&q={{ request.GET.q }}" hx-target="#list_view" hx-swap="beforeend">
+    </div>
+    {% else %}
+    <div id="load_next" hx-swap-oob="true"></div>
+    {% endif %}
+{% else %}
+    <form class="d-flex mb-1" method="GET" hx-get="/" hx-target="#list_view" hx-swap="innerHTML" hx-indicator="#page-spinner"
+        hx-push-url="true" hx-trigger="input changed from:(#search_bar) delay:500ms, input changed from:(#cat_selector), submit">
+        <div class="flex-grow-1 d-flex mx-1">
+            <label class="col-form-label" for="q">Search: </label>
+            <input id="search_bar" class="form-control ms-2" type="search" name="q" value="{{request.GET.q}}">
+        </div>
+        <div>
+            <button class="btn btn-primary">Search</button>
+        </div>
+    </form>
+    <hr>
+    <div id="list_view" class="row">
+    {% include "user_list_snippet.html" %}
+    </div>
+    {% if page_obj.has_next %}
+    <div id="load_next" class="d-block mx-auto htmx-indicator spinner-border" hx-swap-oob="true" hx-trigger="revealed"
+    hx-get="/?page={{ page_obj.next_page_number }}&q={{ request.GET.q }}" hx-target="#list_view" hx-swap="beforeend">
+    </div>
+    {% else %}
+    <div id="load_next" hx-swap-oob="true"></div>
+    {% endif %}
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    {%block title %}
+    <title>Example site</title>
+    {% endblock title %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/spinner.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/htmx.js' %}"></script>
+</head>
+<body class="bg-light">
+    <meta name="htmx-config" content='{"scrollIntoViewOnBoost":false}'>
+    <div id="content" class="bg-white container py-3">
+        {% block content %}
+        {% endblock content %}
+    </div>
+    <div id="page-spinner">
+        <span class="htmx-indicator spinner-border"></span>
+    </div>
+</body>
+</html>
